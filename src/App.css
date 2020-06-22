@@ -17,6 +17,68 @@ main {
   margin-bottom: 80px;
 }
 
+.Modal {
+  background: #EFF0F3;
+  border-radius: 10px;
+  padding: 0 10px 0px 10px;
+}
+
+.ModalHeader, .ModalFooter {
+  height: 50px;
+  display: flex;
+  align-items: center;
+}
+
+.ModalHeader {
+  border-bottom: 1px solid grey;
+}
+
+.ModalFooter {
+  border-top: 1px solid grey;
+  justify-content: end;
+}
+
+.CloseButton {
+  background: none;
+  border: none;
+  color: #FF8E3C;
+}
+
+.PostButton {
+  background: #FF8E3C;
+  border: none;
+  color: #fff;
+  border-radius: 15px;
+  width: 50px;
+  height: 30px;
+}
+
+.PostForm {
+  display: flex;
+  border-radius: 10px;
+  flex-wrap: wrap;
+}
+
+.title-input, .content-input {
+  flex-basis: 100%; 
+  border: none;
+  background: transparent;
+}
+
+
+
+.title-input {
+  height: 50px;
+
+}
+textarea {
+  flex-basis: 100%;
+  background: none;
+  border: none;
+  height: 150px;
+  resize: none;
+}
+
 .PostCard {
   width: 100%;
   max-width: 380px;
@@ -54,4 +116,3 @@ main {
   justify-content: center;
   align-items: center;
 }
-

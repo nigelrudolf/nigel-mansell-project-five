@@ -1,0 +1,13 @@
+import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
+
+const element = <FontAwesomeIcon icon={faTimes} size="2x"/>
+
+const CloseButton = () => {
+    return (
+        <button className="CloseButton">{element}</button>
+    )
+}
+
+export default CloseButton;

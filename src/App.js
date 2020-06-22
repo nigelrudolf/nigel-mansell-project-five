@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import PostForm from './PostForm';
 import PostCard from './PostCard';
 import MenuBar from './MenuBar';
+
 // import axios from 'axios';
 // import logo from './logo.svg';
 import './App.css';
@@ -51,11 +53,11 @@ class App extends Component {
 
 
   displayPostForm = () => {
-    
+
   }
 
   addPost = () => {
-    const copyOfPosts = [...this.state.posts];
+    // const copyOfPosts = [...this.state.posts];
 
 
   }
@@ -68,7 +70,7 @@ class App extends Component {
 
 
   render() {
-    const { posts } = this.state;
+    // const { posts } = this.state;
     return (
       <div className="App App-wrapper">
 
@@ -86,8 +88,10 @@ class App extends Component {
             )
           })
         }
+        <PostForm />
         </main>
-      <MenuBar />
+      
+        <MenuBar />
       </div>
     );
   }
