@@ -1,9 +1,14 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-const PostButton = () => {
-    return (
-        <button className="PostButton">Post</button>
-    )
+
+
+class PostButton extends Component {
+    render() {
+        
+        return (
+            <button className="PostButton" onClick={(event) => {this.props.handleClick(event, this.props.userInput); this.props.clearInput();}}>Post</button>
+            )
+        }
 }
 
 export default PostButton;

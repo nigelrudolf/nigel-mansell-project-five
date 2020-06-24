@@ -12,73 +12,94 @@ class App extends Component {
     super();
     this.state = {
       posts: [
-        {
-          title: "Difficult Project",
-          date: "2020 Jun 20",
-          content: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores placeat iusto optio quae harum autem nostrum iste quia vitae eum excepturi quidem dicta"
-        },
-        {
-          title: "Coding Blog Post",
-          date: "2020 Jun 19",
-          content: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores placeat iusto optio quae harum autem nostrum iste quia vitae eum excepturi quidem dicta"
-        },
-        {
-          title: "Space Related",
-          date: "2020 Jun 19",
-          content: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores placeat iusto optio quae harum autem nostrum iste quia vitae eum excepturi quidem dicta"
-        },
-        {
-          title: "Mars Photos",
-          date: "2020 Jun 19",
-          content: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores placeat iusto optio quae harum autem nostrum iste quia vitae eum excepturi quidem dicta"
-        },
-        {
-          title: "Perseverance Rover",
-          date: "2020 Jun 19",
-          content: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores placeat iusto optio quae harum autem nostrum iste quia vitae eum excepturi quidem dicta"
-        },
-        {
-          title: "Social Distancing in Pandemic",
-          date: "2020 Jun 19",
-          content: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores placeat iusto optio quae harum autem nostrum iste quia vitae eum excepturi quidem dicta"
-        },
-        {
-          title: "The New Normal",
-          date: "2020 Jun 19",
-          content: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores placeat iusto optio quae harum autem nostrum iste quia vitae eum excepturi quidem dicta"
-        }
-      ]
+        // {
+        //   title: "Difficult Project",
+        //   date: "2020 Jun 20",
+        //   content: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores placeat iusto optio quae harum autem nostrum iste quia vitae eum excepturi quidem dicta"
+        // },
+        // {
+        //   title: "Coding Blog Post",
+        //   date: "2020 Jun 19",
+        //   content: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores placeat iusto optio quae harum autem nostrum iste quia vitae eum excepturi quidem dicta"
+        // },
+        // {
+        //   title: "Space Related",
+        //   date: "2020 Jun 19",
+        //   content: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores placeat iusto optio quae harum autem nostrum iste quia vitae eum excepturi quidem dicta"
+        // },
+        // {
+        //   title: "Mars Photos",
+        //   date: "2020 Jun 19",
+        //   content: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores placeat iusto optio quae harum autem nostrum iste quia vitae eum excepturi quidem dicta"
+        // },
+        // {
+        //   title: "Perseverance Rover",
+        //   date: "2020 Jun 19",
+        //   content: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores placeat iusto optio quae harum autem nostrum iste quia vitae eum excepturi quidem dicta"
+        // },
+        // {
+        //   title: "Social Distancing in Pandemic",
+        //   date: "2020 Jun 19",
+        //   content: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores placeat iusto optio quae harum autem nostrum iste quia vitae eum excepturi quidem dicta"
+        // },
+        // {
+        //   title: "The New Normal",
+        //   date: "2020 Jun 19",
+        //   content: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores placeat iusto optio quae harum autem nostrum iste quia vitae eum excepturi quidem dicta"
+        // }
+      ],
+      postFormIsVisible: false
     }
   }
 
 
   displayPostForm = () => {
-
+    const postFormIsVisible = this.state.postFormIsVisible;
+    this.setState({
+      postFormIsVisible: true,
+    });
   }
 
-  addPost = () => {
-    // const copyOfPosts = [...this.state.posts];
-
-
+  closePostForm = () => {
+    const postFormIsVisible = this.state.postFormIsVisible;
+    this.setState({
+      postFormIsVisible: false,
+    });
   }
-  /**
+  
+
+  handleClick = (event, userInput) => {
+    event.preventDefault();
+    const postsRef = [...this.state.posts];
+    postsRef.push(userInput);
+
+    this.setState({
+      posts: postsRef,
+      postFormIsVisible: false
+    })
+    
+  }
+
+  /** Used for firebase
    * 
    */
   componentDidMount() {
+  
+  }
 
+  componentDidUpdate(){
+    console.log(this.state.posts);
   }
 
 
   render() {
-    // const { posts } = this.state;
     return (
       <div className="App App-wrapper">
 
         <h1>Social Media Planner</h1>
         <main>
-        {
-          this.state.posts.map( post => {
-            return(
+        {this.state.posts.map((post) => {
+            return (
               <PostCard
               key={post.title}
               title={post.title}
@@ -86,12 +107,16 @@ class App extends Component {
               content={post.content}
               />
             )
-          })
-        }
-        <PostForm />
+          })}
+        { this.state.postFormIsVisible ? <PostForm
+          closePostForm={this.closePostForm}
+          handleClick={this.handleClick}
+        /> : null }
         </main>
       
-        <MenuBar />
+        <MenuBar 
+          displayPostForm={this.displayPostForm}
+        />
       </div>
     );
   }

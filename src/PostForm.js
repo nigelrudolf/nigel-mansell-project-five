@@ -1,22 +1,75 @@
-import React from 'react';
+import React, { Component } from 'react';
 import CloseButton from './CloseButton';
 import PostButton from './PostButton';
 
-const PostForm = () => {
-    return (
-        <div className="Modal">
-            <div className="ModalHeader">
-                <CloseButton />
+class PostForm extends Component {
+    constructor() {
+        super();
+        this.state = {
+            title: '',
+            date: '',
+            content: ''
+        }
+    }
+
+    handleChange = (event) => {
+        const value = event.target.value;
+
+        this.setState({
+            [event.target.name]: value,
+            [event.target.name]: value
+        })
+      }
+
+    clearInput = () => {
+        this.setState({
+            title: '',
+            date: '',
+            content: ''
+        })
+    }  
+
+
+
+    render() {
+        const {closePostForm, handleClick} = this.props;
+        return (
+            <div className="modal-wrapper">
+                <div className="Modal">
+                    <div className="ModalHeader">
+                        <CloseButton 
+                            closePostForm={closePostForm}
+                            />
+                    </div>
+                    <form className="PostForm">
+                        <input
+                            value={this.state.title}
+                            onChange={this.handleChange}
+                            name="title"
+                            type="text"
+
+                            placeholder="Title"
+                            className="title-input"
+                        />
+                        <textarea
+                            value={this.state.content}
+                            onChange={this.handleChange}
+                            name="content"
+
+                            placeholder="What's your idea"
+                        />
+                    </form>
+                    <div className="ModalFooter">
+                        <PostButton
+                            handleClick={handleClick}
+                            userInput={this.state}
+                            clearInput={this.clearInput}
+                        />
+                    </div>
+                </div>
             </div>
-            <form className="PostForm">
-                <input className="title-input" type="text" placeholder="Title"></input>
-                <textarea placeholder="What's your idea"></textarea>
-            </form>
-            <div className="ModalFooter">
-                <PostButton />
-            </div>
-        </div>
-    )
+        )
+    }
 }
 
 export default PostForm;
