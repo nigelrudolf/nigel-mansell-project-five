@@ -14,13 +14,16 @@ class PostForm extends Component {
 
     handleChange = (event) => {
         const value = event.target.value;
-
+        
+        const date = new Date().toDateString();
+        
         this.setState({
             [event.target.name]: value,
-            [event.target.name]: value
+            [event.target.name]: value,
+            date: date
         })
       }
-
+      
     clearInput = () => {
         this.setState({
             title: '',

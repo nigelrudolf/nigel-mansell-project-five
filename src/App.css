@@ -1,11 +1,10 @@
 .App {
-  /* text-align: center; */
   background-color: #FFFFFE;
 }
 
 .App-wrapper {
   width: 100%;
-  height: 100vh;
+  /* height: 100vh; */
   max-width: 1200px;
   margin: 0 auto;
   
@@ -29,13 +28,12 @@ main {
   z-index: 1;
   width: 100%;
   height: 100vh;
-
 }
 
 .Modal {
   max-width: 300px;
   height: 306px;
-  background: #EFF0F3;
+  background: #fffffe;
   border-radius: 10px;
   padding: 0 10px 0px 10px;
 }
@@ -97,6 +95,8 @@ textarea {
 }
 
 .PostCard {
+  display: flex;
+  justify-content: space-between;
   width: 100%;
   max-width: 380px;
   background: #EFF0F3;
@@ -112,6 +112,13 @@ textarea {
 .PostCard p:nth-child(2) {
   margin-top: 3px;
   margin-bottom: 10px;
+}
+
+.ChevButton {
+  height: 26px;
+  background: none;
+  border: none;
+  color: #FF8E3C;
 }
 
 .AddPostButton {

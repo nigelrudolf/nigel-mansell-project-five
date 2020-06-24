@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import * as firebase from 'firebase';
 import PostForm from './PostForm';
 import PostCard from './PostCard';
 import MenuBar from './MenuBar';
@@ -11,44 +12,9 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      posts: [
-        // {
-        //   title: "Difficult Project",
-        //   date: "2020 Jun 20",
-        //   content: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores placeat iusto optio quae harum autem nostrum iste quia vitae eum excepturi quidem dicta"
-        // },
-        // {
-        //   title: "Coding Blog Post",
-        //   date: "2020 Jun 19",
-        //   content: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores placeat iusto optio quae harum autem nostrum iste quia vitae eum excepturi quidem dicta"
-        // },
-        // {
-        //   title: "Space Related",
-        //   date: "2020 Jun 19",
-        //   content: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores placeat iusto optio quae harum autem nostrum iste quia vitae eum excepturi quidem dicta"
-        // },
-        // {
-        //   title: "Mars Photos",
-        //   date: "2020 Jun 19",
-        //   content: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores placeat iusto optio quae harum autem nostrum iste quia vitae eum excepturi quidem dicta"
-        // },
-        // {
-        //   title: "Perseverance Rover",
-        //   date: "2020 Jun 19",
-        //   content: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores placeat iusto optio quae harum autem nostrum iste quia vitae eum excepturi quidem dicta"
-        // },
-        // {
-        //   title: "Social Distancing in Pandemic",
-        //   date: "2020 Jun 19",
-        //   content: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores placeat iusto optio quae harum autem nostrum iste quia vitae eum excepturi quidem dicta"
-        // },
-        // {
-        //   title: "The New Normal",
-        //   date: "2020 Jun 19",
-        //   content: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores placeat iusto optio quae harum autem nostrum iste quia vitae eum excepturi quidem dicta"
-        // }
-      ],
-      postFormIsVisible: false
+      posts: [],
+      postFormIsVisible: false,
+      editPostIsVisible: false
     }
   }
 
@@ -70,29 +36,60 @@ class App extends Component {
 
   handleClick = (event, userInput) => {
     event.preventDefault();
-    const postsRef = [...this.state.posts];
-    postsRef.push(userInput);
+    const dbRef = firebase.database().ref();
+    dbRef.push(userInput);
 
     this.setState({
-      posts: postsRef,
       postFormIsVisible: false
     })
     
   }
 
-  /** Used for firebase
-   * 
-   */
-  componentDidMount() {
   
+  componentDidMount() {
+    const firebaseConfig = {
+      apiKey: "AIzaSyCW9UhpevFkU0UtsuAfGOs1krgLdqAjVYM",
+      authDomain: "social-media-planner-2fe20.firebaseapp.com",
+      databaseURL: "https://social-media-planner-2fe20.firebaseio.com",
+      projectId: "social-media-planner-2fe20",
+      storageBucket: "social-media-planner-2fe20.appspot.com",
+      messagingSenderId: "995865750758",
+      appId: "1:995865750758:web:333fa1a679a8dc0e63df27"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+  
+
+    const dbRef = firebase.database().ref();
+
+    dbRef.on('value', (response) => {
+      const newState = [];
+      const data = response.val();
+
+      console.log(data);
+
+      for (let key in data) {
+        newState.push({
+          post: data[key],
+          id: key
+        })
+      }
+
+
+      this.setState({
+        posts: newState,
+      });
+    });
+    
   }
 
   componentDidUpdate(){
-    console.log(this.state.posts);
+
   }
 
 
   render() {
+    
     return (
       <div className="App App-wrapper">
 
@@ -101,10 +98,10 @@ class App extends Component {
         {this.state.posts.map((post) => {
             return (
               <PostCard
-              key={post.title}
-              title={post.title}
-              date={post.date}
-              content={post.content}
+              key={post.id}
+              title={post.post.title}
+              date={post.post.date}
+              content={post.post.content}
               />
             )
           })}
