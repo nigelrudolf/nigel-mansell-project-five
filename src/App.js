@@ -18,20 +18,18 @@ class App extends Component {
     }
   }
 
-
   displayPostForm = () => {
-    const postFormIsVisible = this.state.postFormIsVisible;
     this.setState({
       postFormIsVisible: true,
     });
   }
 
   closePostForm = () => {
-    const postFormIsVisible = this.state.postFormIsVisible;
     this.setState({
       postFormIsVisible: false,
     });
   }
+
   
 
   handleClick = (event, userInput) => {
@@ -102,6 +100,8 @@ class App extends Component {
               title={post.post.title}
               date={post.post.date}
               content={post.post.content}
+              editPostIsVisible={this.state.editPostIsVisible}
+              displayEditPost
               />
             )
           })}
