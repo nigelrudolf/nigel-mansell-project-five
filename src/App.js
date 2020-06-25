@@ -14,7 +14,6 @@ class App extends Component {
     this.state = {
       posts: [],
       postFormIsVisible: false,
-      editPostIsVisible: false
     }
   }
 
@@ -30,7 +29,10 @@ class App extends Component {
     });
   }
 
-  
+  deletePost = (postId) => {
+    const dbRef = firebase.database().ref();
+    dbRef.child(postId).remove();
+  }  
 
   handleClick = (event, userInput) => {
     event.preventDefault();
@@ -63,8 +65,6 @@ class App extends Component {
     dbRef.on('value', (response) => {
       const newState = [];
       const data = response.val();
-
-      console.log(data);
 
       for (let key in data) {
         newState.push({
@@ -100,8 +100,7 @@ class App extends Component {
               title={post.post.title}
               date={post.post.date}
               content={post.post.content}
-              editPostIsVisible={this.state.editPostIsVisible}
-              displayEditPost
+              deletePost={() => this.deletePost(post.id)}
               />
             )
           })}

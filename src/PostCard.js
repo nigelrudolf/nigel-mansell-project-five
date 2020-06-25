@@ -23,7 +23,7 @@ closeEditPost = () => {
 }
 
   render() {
-    const { title, date, content } = this.props;
+    const { title, date, content, deletePost } = this.props;
     return (
       <div className="PostCard">
         <div>
@@ -35,7 +35,9 @@ closeEditPost = () => {
         <Chevron 
           displayEditPost={this.displayEditPost}
         /> 
-        {this.state.editPostIsVisible ? <EditPost /> : null}
+        {this.state.editPostIsVisible ? <EditPost 
+          deletePost={deletePost}
+        /> : null}
         
       
       </div>

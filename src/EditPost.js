@@ -12,7 +12,7 @@ class EditPost extends Component {
             <div className="EditPostModal">
                 <ul>
                     <li><button>{edit} Edit</button></li>
-                    <li><button>{trash} Delete</button></li>
+                    <li><button onClick={() => this.props.deletePost()}>{trash} Delete</button></li>
                 </ul>
             </div>
             )
