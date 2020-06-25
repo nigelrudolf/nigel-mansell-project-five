@@ -1,45 +1,93 @@
 import React, { Component } from 'react';
 import Chevron from './Chevron';
 import PostOptions from './PostOptions';
+import UpdateButton from './UpdateButton';
 
 class PostCard extends Component {
   constructor() {
     super();
     this.state = {
-        editPostIsVisible: false
+        title: '',
+        content: '',
+
+        visible: {
+          postOptionsIsVisible: false,
+          editPostIsVisible: false,
+        }
     }
 }
 
-displayEditPost = () => {
+handleUpdateChange = (event) => {
+  const value = event.target.defaultValue;
+
   this.setState({
-    editPostIsVisible: true
+      [event.target.name]: value,
+      [event.target.name]: value,
+  })
+}
+
+displayPostOptions = () => {
+  this.setState({
+    visible: {
+    postOptionsIsVisible: true
+    }
   });
 }
 
-closeEditPost = () => {
+editPost = () => {
   this.setState({
-    editPostIsVisible: false
-  });
+    visible: {
+    editPostIsVisible: true
+    }
+  })
 }
+
+// closePostOptions = () => {
+//   this.setState({
+//     postOptionsIsVisible: false
+//   });
+// }
+
+
+
 
   render() {
     const { title, date, content, deletePost } = this.props;
+
+    const inputField = <input 
+      value={this.state.title}
+      onChange={this.handleUpdateChange}
+      name="title"
+      type="text"
+
+      className="title-input" 
+    />;
+  
+    const textArea = <textarea 
+        value={this.state.content}
+        onChange={this.handleUpdateChange}
+        name="content"
+      />;
+
+
+    const postButton = <div className="ModalFooter"><UpdateButton handleUpdateChange={this.handleUpdateChange} /></div>
+
     return (
       <div className="PostCard">
         <div>
-          <h2>{title}</h2>
-          <p>{date}</p>
-          <p>{content}</p>
+          <h2 className="post-card-heading">{ this.state.visible.editPostIsVisible ? inputField : title }</h2>
+          <p className="post-card-date">{date}</p>
+          <p className="post-card-content">{this.state.visible.editPostIsVisible ? textArea : content}</p>
+          {this.state.visible.editPostIsVisible ? postButton : null}
         </div>
         
         <Chevron 
-          displayEditPost={this.displayEditPost}
+          displayPostOptions={this.displayPostOptions}
         /> 
-        {this.state.editPostIsVisible ? <PostOptions 
+        { this.state.visible.postOptionsIsVisible ? <PostOptions 
           deletePost={deletePost}
+          editPost={this.editPost}
         /> : null}
-        
-      
       </div>
     );
   }

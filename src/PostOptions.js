@@ -11,7 +11,7 @@ class PostOptions extends Component {
         return (
             <div className="PostOptionsModal">
                 <ul>
-                    <li><button>{edit} Edit</button></li>
+                    <li><button onClick={() => this.props.editPost()}>{edit} Edit</button></li>
                     <li><button onClick={() => this.props.deletePost()}>{trash} Delete</button></li>
                 </ul>
             </div>

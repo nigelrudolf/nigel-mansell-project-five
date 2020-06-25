@@ -50,6 +50,7 @@ class PostForm extends Component {
                             onChange={this.handleChange}
                             name="title"
                             type="text"
+                            required
 
                             placeholder="Title"
                             className="title-input"

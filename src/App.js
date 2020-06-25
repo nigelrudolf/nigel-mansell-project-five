@@ -13,7 +13,7 @@ class App extends Component {
     super();
     this.state = {
       posts: [],
-      postFormIsVisible: false,
+      postFormIsVisible: false
     }
   }
 
@@ -31,6 +31,10 @@ class App extends Component {
 
   editPost = (postId) => {
     console.log(`editing ${postId}`);
+
+    this.setState({
+      editPostIsVisible: true
+    })
   }
 
   deletePost = (postId) => {
@@ -47,6 +51,15 @@ class App extends Component {
       postFormIsVisible: false
     })
     
+  }
+
+  handleUpdateClick = (event, userInput) => {
+    event.preventDefault();
+    const dbref = firebase.database().ref();
+    dbref.update(userInput);
+    // firebase.database().ref('/-LYYnjbTOR0Qq03ehjb1').update(settingToChange);
+
+  
   }
 
   
@@ -86,7 +99,7 @@ class App extends Component {
   }
 
   componentDidUpdate(){
-
+    
   }
 
 
@@ -105,6 +118,8 @@ class App extends Component {
               date={post.post.date}
               content={post.post.content}
               deletePost={() => this.deletePost(post.id)}
+              editPost={() => this.editPost(post.id)}
+              postId={post.id}
               />
             )
           })}

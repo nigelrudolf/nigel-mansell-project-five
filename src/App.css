@@ -1,3 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap');
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-size: 1.6rem;
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+.post-card-heading {
+  color: #0D0D0D;
+  font-size: 2.5rem;
+}
+
+.post-card-date {
+  color: #2A2A2A;
+  font-size: 1.4rem;
+}
+
+.post-card-content {
+  color: #2A2A2A;
+  font-size: 1.8rem;
+}
+
 .App {
   background-color: #FFFFFE;
 }
@@ -13,8 +39,19 @@
   align-items: center;
 }
 
+.logo {
+  color: #0D0D0D;
+  font-size: 4rem;
+  width: calc(100% - 40px);
+  text-align: center;
+}
+
 main {
+  width: 100%;
   margin-bottom: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .modal-wrapper {
@@ -31,6 +68,7 @@ main {
 }
 
 .Modal {
+  width: calc(100% - 40px);
   max-width: 300px;
   height: 306px;
   background: #fffffe;
@@ -75,18 +113,21 @@ main {
 }
 
 .title-input, .content-input {
-  flex-basis: 100%; 
+  flex-basis: 100%;
   border: none;
   background: transparent;
 }
 
-
-
 .title-input {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: 700;
+  font-size: 2.2rem;
   height: 50px;
 
 }
 textarea {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 1.8rem;
   flex-basis: 100%;
   background: none;
   border: none;
@@ -94,10 +135,14 @@ textarea {
   resize: none;
 }
 
+textarea::placeholder {
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
 .PostCard {
   display: flex;
   justify-content: space-between;
-  width: 100%;
+  width: calc(100% - 40px);
   max-width: 380px;
   background: #EFF0F3;
   padding: 10px;
@@ -167,7 +212,7 @@ textarea {
 }
 
 .MenuBar {
-  height: 57px;
+  height: 90px;
   width: 100%;
   position: fixed;
   bottom: 0;
