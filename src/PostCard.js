@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Chevron from './Chevron';
-import EditPost from './EditPost';
+import PostOptions from './PostOptions';
 
 class PostCard extends Component {
   constructor() {
@@ -35,7 +35,7 @@ closeEditPost = () => {
         <Chevron 
           displayEditPost={this.displayEditPost}
         /> 
-        {this.state.editPostIsVisible ? <EditPost 
+        {this.state.editPostIsVisible ? <PostOptions 
           deletePost={deletePost}
         /> : null}
         

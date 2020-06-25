@@ -29,6 +29,10 @@ class App extends Component {
     });
   }
 
+  editPost = (postId) => {
+    console.log(`editing ${postId}`);
+  }
+
   deletePost = (postId) => {
     const dbRef = firebase.database().ref();
     dbRef.child(postId).remove();
@@ -91,7 +95,7 @@ class App extends Component {
     return (
       <div className="App App-wrapper">
 
-        <h1>Social Media Planner</h1>
+        <h1 className="logo">Social Media Planner</h1>
         <main>
         {this.state.posts.map((post) => {
             return (

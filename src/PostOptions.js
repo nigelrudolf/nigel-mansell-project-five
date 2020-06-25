@@ -5,11 +5,11 @@ import { faTrashAlt, faEdit} from '@fortawesome/free-solid-svg-icons';
 const trash = <FontAwesomeIcon icon={faTrashAlt} size="1x"/>
 const edit = <FontAwesomeIcon icon={faEdit} size="1x"/>
 
-class EditPost extends Component {
+class PostOptions extends Component {
     render() {
         
         return (
-            <div className="EditPostModal">
+            <div className="PostOptionsModal">
                 <ul>
                     <li><button>{edit} Edit</button></li>
                     <li><button onClick={() => this.props.deletePost()}>{trash} Delete</button></li>
@@ -19,4 +19,4 @@ class EditPost extends Component {
     }
 }
 
-export default EditPost;
+export default PostOptions;
