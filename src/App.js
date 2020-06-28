@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import * as firebase from 'firebase';
-import PostForm from './PostForm';
-import PostCard from './PostCard';
-import MenuBar from './MenuBar';
+import MediaSort from './Components/MediaSort';
+import PostForm from './Components/PostForm';
+import PostCard from './Components/PostCard';
+import MenuBar from './Components/MenuBar';
 
 // import axios from 'axios';
 // import logo from './logo.svg';
@@ -110,6 +111,7 @@ class App extends Component {
 
         <h1 className="logo">Social Media Planner</h1>
         <main>
+        <MediaSort />
         {this.state.posts.map((post) => {
             return (
               <PostCard
