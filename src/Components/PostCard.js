@@ -9,10 +9,15 @@ class PostCard extends Component {
     this.state = {
         title: '',
         content: '',
-
-        visible: {
+        postOptions: {
           postOptionsIsVisible: false,
+          
+        },
+        editPost: {
           editPostIsVisible: false,
+        },
+        panelId: {
+          panelId: ""
         }
     }
 }
@@ -22,24 +27,34 @@ handleUpdateChange = (event) => {
 
   this.setState({
       [event.target.name]: value,
-      [event.target.name]: value,
   })
 }
 
 displayPostOptions = () => {
   this.setState({
-    visible: {
+    postOptions: {
     postOptionsIsVisible: true
     }
   });
+  this.setState({
+    editPost: {
+      editPostIsVisible: false
+    }
+  })
+
 }
 
 editPost = () => {
   this.setState({
-    visible: {
+    editPost: {
     editPostIsVisible: true
     }
-  })
+  });
+  this.setState({
+    postOptions: {
+      postOptionsIsVisible: false
+    }
+  });
 }
 
 // closePostOptions = () => {
@@ -48,49 +63,86 @@ editPost = () => {
 //   });
 // }
 
+togglePostOptions = (panelId) => {
+  // In order to achieve only one options panel being vibile at the same time
+  // this component needs to reference some global shared state perhaps App.js
+  // in order to be able to see which panel is open and closing the others
 
-
-
-  render() {
-    const { title, date, content, deletePost } = this.props;
-
-    const inputField = <input 
-      value={this.state.title}
-      onChange={this.handleUpdateChange}
-      name="title"
-      type="text"
-
-      className="title-input" 
-    />;
+  // let panel = "asdasdasd";
+  // let visible = true;
   
-    const textArea = <textarea 
-        value={this.state.content}
-        onChange={this.handleUpdateChange}
-        name="content"
-      />;
+  // if ( this.state.postOptions.postOptionsIsVisible && this.state.panelId.panelId !== panel ) {
+  //   this.setState({
+  //     postOptions: {
+  //       postOptionsIsVisible: false
+  //     } 
+  //   })
+  // }
+
+  this.setState({
+    postOptions: {
+    postOptionsIsVisible: true
+    }
+  });
+  this.setState({
+    editPost: {
+      editPostIsVisible: false
+    }
+  })
+  this.setState({
+    pandelId: {
+      panelId,
+    }
+  })
+  this.props.updateMainPanel(panelId);
+  
+}
 
 
-    const postButton = <div className="ModalFooter"><UpdateButton handleUpdateChange={this.handleUpdateChange} /></div>
 
-    return (
-      <div className="PostCard">
-        <div>
-          <h2 className="post-card-heading">{ this.state.visible.editPostIsVisible ? inputField : title }</h2>
-          <p className="post-card-date">{date}</p>
-          <p className="post-card-content">{this.state.visible.editPostIsVisible ? textArea : content}</p>
-          {this.state.visible.editPostIsVisible ? postButton : null}
-        </div>
-        
-        <Chevron 
-          displayPostOptions={this.displayPostOptions}
-        /> 
-        { this.state.visible.postOptionsIsVisible ? <PostOptions 
-          deletePost={deletePost}
-          editPost={this.editPost}
-        /> : null}
+
+render() {
+  const { title, date, content, deletePost, postId, mainPanelId } = this.props;
+
+  const inputField = <input 
+    value={this.state.title}
+    onChange={this.handleUpdateChange}
+    name="title"
+    type="text"
+
+    className="title-input" 
+  />;
+
+  const textArea = <textarea 
+      value={this.state.content}
+      onChange={this.handleUpdateChange}
+      name="content"
+  />;
+
+
+  const postButton = <div className="ModalFooter"><UpdateButton handleUpdateChange={this.handleUpdateChange} /></div>
+
+  return (
+    <div className="PostCard">
+      <div>
+        <h2 className="post-card-heading">{ this.state.editPost.editPostIsVisible ? inputField : title }</h2>
+        <p className="post-card-date">{date}</p>
+        <p className="post-card-content">{this.state.editPost.editPostIsVisible ? textArea : content}</p>
+        {this.state.editPost.editPostIsVisible ? postButton : null}
       </div>
-    );
-  }
+      
+      <Chevron 
+        // displayPostOptions={this.displayPostOptions}
+        togglePostOptions={() => this.togglePostOptions(postId, mainPanelId)}
+      /> 
+      { 
+      this.state.postOptions.postOptionsIsVisible ? <PostOptions 
+        deletePost={deletePost}
+        editPost={this.editPost}
+      /> : null}
+    </div>
+  );
+}
 }
 
 export default PostCard;

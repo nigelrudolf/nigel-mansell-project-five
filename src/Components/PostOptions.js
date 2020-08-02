@@ -7,7 +7,6 @@ const edit = <FontAwesomeIcon icon={faEdit} size="1x"/>
 
 class PostOptions extends Component {
     render() {
-        
         return (
             <div className="PostOptionsModal">
                 <ul>

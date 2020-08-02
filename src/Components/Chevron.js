@@ -6,7 +6,7 @@ const element = <FontAwesomeIcon icon={faChevronDown} size="1x"/>
 
 class Chevron extends Component {
     render() {
-        return <button className="ChevButton" onClick={this.props.displayPostOptions}>{element}</button>        
+        return <button className="ChevButton" onClick={this.props.togglePostOptions}>{element}</button>        
     }
 }
 
