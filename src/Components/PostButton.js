@@ -1,14 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 
-
-class PostButton extends Component {
-    render() {
-        
-        return (
-            <button className="PostButton" onClick={(event) => {this.props.handleClick(event, this.props.userInput); this.props.clearInput();}}>Post</button>
-            )
-        }
+function PostButton({handleClick, userInput, clearInput}) {
+    return <button className="PostButton" onClick={(event) => {handleClick(event, userInput); clearInput();}}>Post</button>
 }
 
 export default PostButton;
