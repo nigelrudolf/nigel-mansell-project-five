@@ -1,13 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 
-const element = <FontAwesomeIcon icon={faChevronDown} size="1x"/>
+const element = <FontAwesomeIcon icon={faChevronDown} size="1x"/>;
 
-class Chevron extends Component {
-    render() {
-        return <button className="ChevButton" onClick={this.props.togglePostOptions}>{element}</button>        
-    }
+function Chevron({ togglePostOptions }) {
+    return <button className="ChevButton" onClick={togglePostOptions}>{element}</button>;
 }
 
 export default Chevron;
