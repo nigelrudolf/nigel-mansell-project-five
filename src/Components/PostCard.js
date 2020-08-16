@@ -1,4 +1,4 @@
-import React, { useState, Component } from 'react';
+import React, { useState } from 'react';
 import Chevron from './Chevron';
 import PostOptions from './PostOptions';
 import UpdateButton from './UpdateButton';
