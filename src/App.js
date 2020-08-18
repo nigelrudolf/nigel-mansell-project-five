@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import firebase from './Components/firebase';
 import MediaSort from './Components/MediaSort';
 import PostForm from './Components/PostForm';
