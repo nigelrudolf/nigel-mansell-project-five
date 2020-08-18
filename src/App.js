@@ -14,10 +14,12 @@ function App() {
 
   const displayPostForm = () => {
     setPostFormIsVisible(true);
+    document.querySelector('body').setAttribute('style', 'overflow: hidden');
   }
 
   const closePostForm = () => {
     setPostFormIsVisible(false);
+    document.querySelector('body').removeAttribute('style');
   }
 
   const editPost = (postId) => {
