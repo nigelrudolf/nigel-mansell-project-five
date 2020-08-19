@@ -5,9 +5,9 @@ import { faTrashAlt, faEdit} from '@fortawesome/free-solid-svg-icons';
 const trash = <FontAwesomeIcon icon={faTrashAlt} size="1x"/>
 const edit = <FontAwesomeIcon icon={faEdit} size="1x"/>
 
-function PostOptions({ editPost, deletePost }) {
+function PostOptions({editPost, deletePost, setPostOptionsIsVisible}) {
     return (
-        <div className="PostOptionsModal">
+        <div className="PostOptionsModal" onClick={() => setPostOptionsIsVisible(false)}>
             <ul>
                 <li><button onClick={() => editPost()}>{edit} Edit</button></li>
                 <li><button onClick={() => deletePost()}>{trash} Delete</button></li>
