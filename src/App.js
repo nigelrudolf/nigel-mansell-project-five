@@ -10,7 +10,9 @@ function App() {
   const [posts, setPosts] = useState([]);
   const [postFormIsVisible, setPostFormIsVisible] = useState(false);
   const [editPostIsVisible, setEditPostIsVisible] = useState(false);
-  const [panelId, setPanelId] = useState('');
+  const [currentPostOptionPanel, setCurrentPostOptionPanel] = useState({
+    currentPanel: ''
+  });
 
   const displayPostForm = () => {
     setPostFormIsVisible(true);
@@ -48,10 +50,6 @@ function App() {
     // firebase.database().ref('/-LYYnjbTOR0Qq03ehjb1').update(settingToChange);
   }
 
-  const updateMainPanel = (panelId) => {
-    setPanelId(panelId);
-  }
-
   useEffect(() => {
       const dbRef = firebase.database().ref();
 
@@ -85,8 +83,8 @@ function App() {
             deletePost={() => deletePost(post.id)}
             editPost={() => editPost(post.id)}
             postId={post.id}
-            mainPanelId={panelId}
-            updateMainPanel={updateMainPanel}
+            currentPostOptionPanel={currentPostOptionPanel}
+            setCurrentPostOptionPanel={setCurrentPostOptionPanel}
             />
           )
         })}

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Chevron from './Chevron';
 import PostOptions from './PostOptions';
 import UpdateButton from './UpdateButton';
@@ -14,9 +14,9 @@ function PostCard(props) {
 
   const [editPostIsVisible, setEditPostIsVisible] = useState(false);
 
-  const [panelId, setPanelId] = useState('');
+  const [panelId, setPanelId] = useState({panelId: ''});
    
-  const {title, date, content, deletePost, postId, mainPanelId, updateMainPanel} = props;
+  const {title, date, content, deletePost, postId, currentPostOptionPanel, setCurrentPostOptionPanel} = props;
 
   
 
@@ -32,12 +32,15 @@ function PostCard(props) {
     setPostOptionsIsVisible(false);
   }
 
-  const togglePostOptions = (panelId) => {
+  const togglePostOptions = (postId) => {
+    let panelId = postId;
     setPostOptionsIsVisible(true);
     setEditPostIsVisible(false);
 
-    setPanelId(panelId);
-    updateMainPanel(panelId);
+    setPanelId({panelId: panelId});
+
+    setCurrentPostOptionPanel({currentPanel: panelId})
+
   }
 
   const inputField = <input 
@@ -58,6 +61,11 @@ function PostCard(props) {
 
   const postButton = <div className="ModalFooter"><UpdateButton handleUpdateChange={handleUpdateChange} /></div>
 
+  useEffect(() => {
+    if (panelId.panelId !== currentPostOptionPanel.currentPanel) {
+      setPostOptionsIsVisible(false);
+    }
+  }, [currentPostOptionPanel.currentPanel, panelId.panelId])
   
   return (
     <div className="PostCard" >
@@ -69,7 +77,7 @@ function PostCard(props) {
       </div>
       
       <Chevron
-        togglePostOptions={() => togglePostOptions(postId, mainPanelId)}
+        togglePostOptions={() => togglePostOptions(postId)}
       /> 
       { 
       postOptionsIsVisible ? <PostOptions
