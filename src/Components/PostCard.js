@@ -68,7 +68,11 @@ function PostCard(props) {
   }, [currentPostOptionPanel.currentPanel, panelId.panelId])
   
   return (
-    <div className="PostCard" >
+    <div className="PostCard" onClick={() => {
+      if (postOptionsIsVisible === true ) {
+        setPostOptionsIsVisible(false)
+      }
+    }}>
       <div>
         <h2 className="post-card-heading">{ editPostIsVisible ? inputField : title }</h2>
         <p className="post-card-date">{date}</p>
