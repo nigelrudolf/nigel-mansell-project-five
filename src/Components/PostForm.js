@@ -67,7 +67,6 @@ function PostForm({closePostForm, handleClick}) {
                     <PostButton
                         handleClick={handleClick}
                         userInput={userInput}
-
                         clearInput={clearInput}
                     />
                 </div>

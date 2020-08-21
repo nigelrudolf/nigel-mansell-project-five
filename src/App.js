@@ -26,7 +26,6 @@ function App() {
 
   const editPost = (postId) => {
     console.log(`editing ${postId}`);
-
     setEditPostIsVisible(true);
   }
 
@@ -39,8 +38,7 @@ function App() {
     event.preventDefault();
     const dbRef = firebase.database().ref();
     dbRef.push(userInput);
-
-    setPostFormIsVisible(false);
+    closePostForm();
   }
 
   const handleUpdateClick = (event, userInput) => {
