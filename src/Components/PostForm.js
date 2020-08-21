@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import CloseButton from './CloseButton';
 import PostButton from './PostButton';
+import useOutsideAlerter from '../Hooks/useOutsideAlerter';
 
 function PostForm({closePostForm, handleClick}) {
 
@@ -9,6 +10,9 @@ function PostForm({closePostForm, handleClick}) {
         date: '',
         content: '',
     });
+
+    const wrapperRef = useRef(null);
+    useOutsideAlerter(wrapperRef, () => closePostForm());
 
     const handleChange = (event) => {
         const value = event.target.value;
@@ -31,7 +35,7 @@ function PostForm({closePostForm, handleClick}) {
 
     return (
         <div className="modal-wrapper">
-            <div className="Modal">
+            <div ref={wrapperRef} className="Modal">
                 <div className="ModalHeader">
                     <CloseButton 
                         closePostForm={closePostForm}
