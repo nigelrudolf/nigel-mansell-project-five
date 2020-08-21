@@ -11,7 +11,7 @@ function App() {
   const [postFormIsVisible, setPostFormIsVisible] = useState(false);
   const [editPostIsVisible, setEditPostIsVisible] = useState(false);
   const [currentPostOptionPanel, setCurrentPostOptionPanel] = useState({
-    currentPanel: ''
+    currentPanel: '',
   });
 
   const displayPostForm = () => {
