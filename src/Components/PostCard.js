@@ -81,6 +81,7 @@ function PostCard(props) {
       /> 
       { 
       postOptionsIsVisible ? <PostOptions
+        postOptionsIsVisible={postOptionsIsVisible}
         setPostOptionsIsVisible={setPostOptionsIsVisible}
         deletePost={deletePost}
         editPost={editPost}
