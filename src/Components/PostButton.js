@@ -1,8 +1,7 @@
 import React from 'react';
 
-
-function PostButton({handleClick, userInput, clearInput}) {
-    return <button className="PostButton" onClick={(event) => {handleClick(event, userInput); clearInput();}}>Post</button>
+function PostButton() {
+    return <button className="PostButton" type="submit">Post</button>
 }
 
 export default PostButton;

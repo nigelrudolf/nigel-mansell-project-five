@@ -41,16 +41,13 @@ function PostForm({closePostForm, handleClick}) {
                         closePostForm={closePostForm}
                         />
                 </div>
-                <form className="PostForm">
-                   
-           
+                <form className="PostForm" onSubmit={(event) => {handleClick(event, userInput); clearInput();}}>
                     <input
                         value={userInput.title}
                         onChange={handleChange}
                         name="title"
                         type="text"
-                        
-
+                        required
                         placeholder="Title"
                         className="title-input"
                     />
@@ -59,17 +56,13 @@ function PostForm({closePostForm, handleClick}) {
                         onChange={handleChange}
                         name="content"
                         type="text"
-
+                        required
                         placeholder="What's your idea"
                     />
+                    <div className="ModalFooter">
+                    <PostButton/>
+                    </div>
                 </form>
-                <div className="ModalFooter">
-                    <PostButton
-                        handleClick={handleClick}
-                        userInput={userInput}
-                        clearInput={clearInput}
-                    />
-                </div>
             </div>
         </div>
     )
