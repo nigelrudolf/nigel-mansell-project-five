@@ -98,7 +98,7 @@ main {
   padding: 0 10px 0px 10px;
 }
 
-.ModalHeader, .ModalFooter {
+.ModalHeader, .ModalFooter, .display-edit-post-footer {
   height: 50px;
   display: flex;
   align-items: center;
@@ -108,7 +108,7 @@ main {
   border-bottom: 1px solid #E2E8EC;
 }
 
-.ModalFooter {
+.ModalFooter, .display-edit-post-footer {
   border-top: 1px solid #E2E8EC;
   justify-content: end;
   flex-basis: 100%;
@@ -120,14 +120,24 @@ main {
   color: #FF8E3C;
 }
 
-.PostButton {
+.PostButton, .update-button, .cancel-update-button {
   background: #FF8E3C;
   border: none;
   color: #fff;
   border-radius: 15px;
-  width: 50px;
+  padding: 0 15px;
   height: 30px;
 }
+
+.update-button { 
+  margin-left: 15px;
+}
+.cancel-update-button {
+  color: #E0245E;
+  border: 1px solid #E0245E;
+  background: #fff;
+}
+
 
 .PostForm {
   display: flex;
@@ -135,20 +145,20 @@ main {
   flex-wrap: wrap;
 }
 
-.title-input, .content-input {
+.title-input, .content-input, .edit-title-input {
   flex-basis: 100%;
   border: none;
   background: transparent;
 }
 
-.title-input {
+.title-input, .edit-title-input {
   font-family: 'Source Sans Pro', sans-serif;
   font-weight: 700;
   font-size: 2.2rem;
   height: 50px;
-
 }
-textarea {
+
+textarea, .edit-textarea {
   font-family: 'Source Sans Pro', sans-serif;
   font-size: 1.8rem;
   flex-basis: 100%;
@@ -158,13 +168,21 @@ textarea {
   resize: none;
 }
 
-textarea::placeholder {
+textarea::placeholder, .edit-textarea::placeholder {
   font-family: 'Source Sans Pro', sans-serif;
 }
 
+.edit-title-input {
+  flex-basis: unset;
+  width: 100%;
+}
+
+.edit-textarea {
+  width: 100%;
+}
+
 .PostCard {
-  display: flex;
-  justify-content: space-between;
+  position: relative;
   width: calc(100% - 40px);
   max-width: 380px;
   background: #EFF0F3;
@@ -172,7 +190,7 @@ textarea::placeholder {
   border-radius: 10px;
   margin-bottom: 10px;
 
-  position: relative;
+  
 }
 
 .PostCard h2, .PostCard p {
@@ -184,7 +202,20 @@ textarea::placeholder {
   margin-bottom: 10px;
 }
 
+.display-post {
+  width: calc(100% - 30px);
+}
+
+.display-edit-post-footer {
+  border-top: 1px solid #d3d9dd;
+}
+
 .ChevButton {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  
+  padding: 0;
   height: 30px;
   width: 30px;
   border-radius: 20px;

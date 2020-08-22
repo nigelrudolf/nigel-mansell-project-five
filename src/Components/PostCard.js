@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Chevron from './Chevron';
 import PostOptions from './PostOptions';
-import UpdateButton from './UpdateButton';
 
 
 function PostCard(props) {
@@ -43,42 +42,60 @@ function PostCard(props) {
 
   }
 
-  const inputField = <input 
-    value={post.title}
-    onChange={handleUpdateChange}
-    name="title"
-    type="text"
+  const cancelEditPost = () => {
+    setEditPostIsVisible(false);
+  }
 
-    className="title-input" 
-  />;
+  const displayPost = () => {
+    return (
+      <>
+      <div className="display-post">
+        <h2 className="post-card-heading">{title}</h2>
+        <p className="post-card-date">{date}</p>
+        <p className="post-card-content">{content}</p>
+      </div>
+      <Chevron togglePostOptions={() => togglePostOptions(postId)}/> 
+      </>
+    )
+  }
 
-  const textArea = <textarea 
-      value={post.content}
-      onChange={handleUpdateChange}
-      name="content"
-  />;
+  const displayEditPost = () => {
 
+  return (
+    <form className="display-edit-post">
+      <input 
+        defaultValue={title}
+        onChange={handleUpdateChange}
+        name="title"
+        type="text"
 
-  const postButton = <div className="ModalFooter"><UpdateButton handleUpdateChange={handleUpdateChange} /></div>
+        className="edit-title-input" 
+      />
+      <p className="post-card-date">{date}</p>
+      <textarea
+        className="edit-textarea" 
+        defaultValue={content}
+        onChange={handleUpdateChange}
+        name="content"
+      />
+      <div className="display-edit-post-footer">
+        <button className="cancel-update-button" onClick={cancelEditPost}>Cancel</button> 
+        <button className="update-button" type="submit">Update</button>
+      </div>
+    </form>
+    )
+  }  
 
   useEffect(() => {
     if (panelId.panelId !== currentPostOptionPanel.currentPanel) {
       setPostOptionsIsVisible(false);
     }
-  }, [currentPostOptionPanel.currentPanel, panelId.panelId])
+  }, [currentPostOptionPanel.currentPanel, panelId.panelId, post])
   
   return (
     <div className="PostCard">
-      <div>
-        <h2 className="post-card-heading">{ editPostIsVisible ? inputField : title }</h2>
-        <p className="post-card-date">{date}</p>
-        <p className="post-card-content">{editPostIsVisible ? textArea : content}</p>
-        {editPostIsVisible ? postButton : null}
-      </div>
+      {editPostIsVisible ? displayEditPost() : displayPost() }
       
-      <Chevron
-        togglePostOptions={() => togglePostOptions(postId)}
-      /> 
       { 
       postOptionsIsVisible ? <PostOptions
         postOptionsIsVisible={postOptionsIsVisible}
