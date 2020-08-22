@@ -29,8 +29,8 @@ function PostOptions({editPost, deletePost, postOptionsIsVisible, setPostOptions
             item && 
             <animated.div key={key} style={props} ref={wrapperRef} className="PostOptionsModal">
                 <ul>
-                    <li><button onClick={() => editPost()}>{edit} Edit</button></li>
-                    <li><button onClick={() => deletePost()}>{trash} Delete</button></li>
+                    <li><button onClick={() => editPost()}><span className="post-options-icon">{edit}</span><span className="post-options-name">Edit</span></button></li>
+                    <li><button onClick={() => deletePost()}><span className="post-options-icon">{trash}</span><span className="post-options-name">Delete</span></button></li>
                 </ul>
             </animated.div>
         )
