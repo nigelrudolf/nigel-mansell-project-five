@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/nigel-mansell-project-five/precache-manifest.11d058bf17e444267105a74c1fd5dfc4.js"
+  "/nigel-mansell-project-five/precache-manifest.81e2fca762a817270ebc5c234a30830f.js"
 );
 
 self.addEventListener('message', (event) => {
