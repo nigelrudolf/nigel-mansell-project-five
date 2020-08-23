@@ -4,10 +4,6 @@ import PostOptions from './PostOptions';
 
 
 function PostCard(props) {
-  const [post, setPost] = useState({
-    title: '',
-    content: '',
-  });
 
   const [postOptionsIsVisible, setPostOptionsIsVisible] = useState(false);
 
@@ -17,13 +13,17 @@ function PostCard(props) {
    
   const {title, date, content, deletePost, postId, currentPostOptionPanel, setCurrentPostOptionPanel} = props;
 
-  
+  const [userInput, setUserInput] = useState({
+    title: title,
+    content: content,
+  });
 
   const handleUpdateChange = (event) => {
-    const value = event.target.defaultValue;
-    setPost({
-      [event.target.name]: value,
-    });
+    const value = event.target.value;
+        setUserInput({
+            ...userInput,
+            [event.target.name]: value,
+        });        
   }
 
   const editPost = () => {
@@ -64,19 +64,18 @@ function PostCard(props) {
   return (
     <form className="display-edit-post">
       <input 
-        defaultValue={title}
+        value={userInput.title}
         onChange={handleUpdateChange}
         name="title"
         type="text"
-
         className="edit-title-input" 
       />
       <p className="post-card-date">{date}</p>
       <textarea
-        className="edit-textarea" 
-        defaultValue={content}
+        value={userInput.content}
         onChange={handleUpdateChange}
         name="content"
+        className="edit-textarea"
       />
       <div className="display-edit-post-footer">
         <button className="cancel-update-button" onClick={cancelEditPost}>Cancel</button> 
@@ -90,14 +89,13 @@ function PostCard(props) {
     if (panelId.panelId !== currentPostOptionPanel.currentPanel) {
       setPostOptionsIsVisible(false);
     }
-  }, [currentPostOptionPanel.currentPanel, panelId.panelId, post])
+  }, [currentPostOptionPanel.currentPanel, panelId.panelId])
   
   return (
     <div className="PostCard">
       {editPostIsVisible ? displayEditPost() : displayPost() }
       
-      { 
-      postOptionsIsVisible ? <PostOptions
+      { postOptionsIsVisible ? <PostOptions
         postOptionsIsVisible={postOptionsIsVisible}
         setPostOptionsIsVisible={setPostOptionsIsVisible}
         deletePost={deletePost}
@@ -105,7 +103,6 @@ function PostCard(props) {
       /> : null}
     </div>
   );
-
 }
 
 export default PostCard;
