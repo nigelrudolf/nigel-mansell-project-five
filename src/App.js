@@ -41,11 +41,9 @@ function App() {
     closePostForm();
   }
 
-  const handleUpdateClick = (event, userInput) => {
+  const handleUpdateClick = (event, userInput, postId) => {
     event.preventDefault();
-    const dbref = firebase.database().ref();
-    dbref.update(userInput);
-    // firebase.database().ref('/-LYYnjbTOR0Qq03ehjb1').update(settingToChange);
+    firebase.database().ref(postId).update(userInput);
   }
 
   useEffect(() => {
@@ -67,7 +65,6 @@ function App() {
 
   return (
     <div className="App App-wrapper">
-
       <h1 className="logo">Social Media Planner</h1>
       <main>
       <MediaSort />
@@ -83,6 +80,7 @@ function App() {
             postId={post.id}
             currentPostOptionPanel={currentPostOptionPanel}
             setCurrentPostOptionPanel={setCurrentPostOptionPanel}
+            handleUpdateClick={handleUpdateClick}
             />
           )
         })}
@@ -91,13 +89,11 @@ function App() {
         handleClick={handleClick}
       /> : null }
       </main>
-    
       <MenuBar 
         displayPostForm={displayPostForm}
       />
     </div>
   );
-
 }
 
 export default App;

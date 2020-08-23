@@ -4,14 +4,13 @@ import PostOptions from './PostOptions';
 
 
 function PostCard(props) {
-
   const [postOptionsIsVisible, setPostOptionsIsVisible] = useState(false);
 
   const [editPostIsVisible, setEditPostIsVisible] = useState(false);
 
   const [panelId, setPanelId] = useState({panelId: ''});
    
-  const {title, date, content, deletePost, postId, currentPostOptionPanel, setCurrentPostOptionPanel} = props;
+  const {title, date, content, deletePost, postId, currentPostOptionPanel, setCurrentPostOptionPanel, handleUpdateClick} = props;
 
   const [userInput, setUserInput] = useState({
     title: title,
@@ -26,6 +25,11 @@ function PostCard(props) {
         });        
   }
 
+  const handleUpdateSubmit = (e, userInput, postId) => {
+    handleUpdateClick(e, userInput, postId);
+    setEditPostIsVisible(false);
+  }
+
   const editPost = () => {
     setEditPostIsVisible(true);
     setPostOptionsIsVisible(false);
@@ -35,11 +39,8 @@ function PostCard(props) {
     let panelId = postId;
     setPostOptionsIsVisible(true);
     setEditPostIsVisible(false);
-
-    setPanelId({panelId: panelId});
-
+    setPanelId({panelId: panelId})
     setCurrentPostOptionPanel({currentPanel: panelId})
-
   }
 
   const cancelEditPost = () => {
@@ -60,17 +61,15 @@ function PostCard(props) {
   }
 
   const displayEditPost = () => {
-
   return (
-    <form className="display-edit-post">
+    <form className="display-edit-post" onSubmit={(e) => handleUpdateSubmit(e, userInput, postId)}>
       <input 
         value={userInput.title}
         onChange={handleUpdateChange}
         name="title"
         type="text"
-        className="edit-title-input" 
+        className="edit-title-input"
       />
-      <p className="post-card-date">{date}</p>
       <textarea
         value={userInput.content}
         onChange={handleUpdateChange}
@@ -94,7 +93,6 @@ function PostCard(props) {
   return (
     <div className="PostCard">
       {editPostIsVisible ? displayEditPost() : displayPost() }
-      
       { postOptionsIsVisible ? <PostOptions
         postOptionsIsVisible={postOptionsIsVisible}
         setPostOptionsIsVisible={setPostOptionsIsVisible}
